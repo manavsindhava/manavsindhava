@@ -1,0 +1,83 @@
+ <!-- Task2:NeedtocreateaJavascript function for the sum of string 
+(Example like "1.5, 2.3, 3.1, 4, 5.5, 6, 7, 8,  9, 10.9") -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sum of Numbers in a String</title>
+        <style>
+            body {
+                font-family: Arial;
+                background-color: #eaf7f7;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+            .container {
+                background: #fff;
+                padding: 20px 30px;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                text-align: center;
+                max-width: 400px;
+                width: 100%;
+            }
+            h1 {
+                font-size: 24px;
+                margin-bottom: 20px;
+                color: #333;
+            }
+            input {
+                width: 80%;
+                padding: 10px;
+                font-size: 16px;
+                margin-bottom: 20px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                outline: none;
+            }
+            button {
+                background-color: #28a745;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+            button:hover {
+                background-color: #218838;
+            }
+            p {
+                margin-top: 20px;
+                font-size: 18px;
+                color: #333;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Sum of Numbers</h1>
+            <input type="text" id="inputString" placeholder="Enter numbers (e.g., 1.5, 2.3, 3.1)" />
+            <button onclick="calculateSum()">Calculate Sum</button>
+            <p id="result">Sum: 0</p>
+        </div>
+
+        <script>
+            function calculateSum() {
+                const inputString = document.getElementById('inputString').value;
+                const numbers = inputString.split(',').map(num => parseFloat(num.trim()));
+    
+                const sum = numbers.filter(num => !isNaN(num)).reduce((acc, num) => acc + num, 0)
+                document.getElementById('result').innerText = `Sum: ${sum.toFixed(2)}`;
+            }
+        </script>
+    </body>
+    </html>
+    
+
+
