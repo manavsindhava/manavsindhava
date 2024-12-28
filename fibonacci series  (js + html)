@@ -1,0 +1,61 @@
+<!-- Task5:Writeaprogramtoprint fibonacci series. Take the number of steps from input using HTML Input
+ and whenclick on Print button, using JS print the entered number of steps in the fibonacci series on HTML
+ page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci Series</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin: 20px;
+            background-color: gray;
+        }
+        #output {
+            margin-top: 20px;
+            font-weight: bold;
+            color: white;
+        }
+        button:hover{
+            background-color: darkgrey;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: white;">Fibonacci Series Generator</h1>
+    <label style="color: white;" for="steps">Enter the number:</label>
+    <input type="number" id="steps" min="1" placeholder="Enter a number">
+    <button id="btn" onclick="printFibonacci()">Print</button>
+
+    <div id="output"></div>
+
+    <script>
+        function printFibonacci() {
+            const stepsInput = document.getElementById("steps");
+            const outputDiv = document.getElementById("output");
+            const steps = parseInt(stepsInput.value);
+
+            if (isNaN(steps) || steps <= 0) {
+                outputDiv.innerHTML = "Please enter a valid positive number.";
+                return;
+            }
+
+            const fibonacciSeries = [];
+            for (let i = 0; i < steps; i++) {
+                if (i === 0) {
+                    fibonacciSeries.push(0);
+                } else if (i === 1) {
+                    fibonacciSeries.push(1);
+                } else {
+                    fibonacciSeries.push(fibonacciSeries[i - 1] + fibonacciSeries[i - 2]);
+                }
+            }
+
+            outputDiv.innerHTML = `Fibonacci Series (${steps} steps): <br>${fibonacciSeries.join(', ')}`;
+        }
+    </script>
+</body>
+</html>
