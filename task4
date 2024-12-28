@@ -1,0 +1,144 @@
+<!-- Task4:WriteaJavaScript program that creates a class called University with properties for university
+names and departments. Include methods to add a department, remove a department, and display all
+departments. Create an instance of the University class and add and remove departments. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Departments Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #ffffff;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            font-size: 18px;
+            margin: 5px 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>University Department Manager</h1>
+        <input type="text" id="departmentInput" placeholder="Enter department name" />
+        <button onclick="addDepartment()">Add Department</button>
+        <button onclick="removeDepartment()">Remove Department</button>
+        <h3>Departments:</h3>
+        <ul id="departmentList"></ul>
+    </div>
+
+    <script>
+        class University {
+            constructor(name) {
+                this.name = name;
+                this.departments = [];
+            }
+
+            addDepartment(department) {
+                if (!this.departments.includes(department)) {
+                    this.departments.push(department);
+                } else {
+                    alert("Department already exists!");
+                }
+            }
+
+            removeDepartment(department) {
+                const index = this.departments.indexOf(department);
+                if (index !== -1) {
+                    this.departments.splice(index, 1);
+                } else {
+                    alert("Department not found!");
+                }
+            }
+
+            displayDepartments() {
+                return this.departments;
+            }
+        }
+
+        const myUniversity = new University("My University");
+
+        function addDepartment() {
+            const departmentInput = document.getElementById('departmentInput').value.trim();
+            if (departmentInput) {
+                myUniversity.addDepartment(departmentInput);
+                updateDepartmentList();
+                document.getElementById('departmentInput').value = '';
+            } else {
+                alert("Please enter a department name.");
+            }
+        }
+
+        function removeDepartment() {
+            const departmentInput = document.getElementById('departmentInput').value.trim();
+            if (departmentInput) {
+                myUniversity.removeDepartment(departmentInput);
+                updateDepartmentList();
+                document.getElementById('departmentInput').value = '';
+            } else {
+                alert("Please enter a department name.");
+            }
+        }
+
+        function updateDepartmentList() {
+            const departmentList = document.getElementById('departmentList');
+            const departments = myUniversity.displayDepartments();
+            departmentList.innerHTML = '';
+            departments.forEach(dept => {
+                const listItem = document.createElement('li');
+                listItem.textContent = dept;
+                departmentList.appendChild(listItem);
+            });
+        }
+    </script>
+</body>
+</html>
