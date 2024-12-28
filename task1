@@ -1,0 +1,79 @@
+<!-- Task1:NeedtocreateJavaScript functions for a sum of numbers in the string (Example like
+“foo8bar8cat2tc2”) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sum of Numbers in String</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f8ff;
+        }
+        .container {
+            text-align: center;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        p {
+            font-size: 18px;
+            color: #333;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sum of Numbers in a String</h1>
+        <input type="text" id="inputString"  />
+        <button onclick="calculateSum()">Calculate Sum</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function calculateSum() {
+            const inputString = document.getElementById('inputString').value;
+            const numbers = inputString.match(/\d+/g);
+
+            if (!numbers) {
+                document.getElementById('result').innerText = 'Sum: 0';
+                return;
+            }
+
+            const sum = numbers.map(Number).reduce((acc, num) => acc + num, 0);
+            document.getElementById('result').innerText = `Sum: ${sum}`;
+        }
+    </script>
+</body>
+</html>
