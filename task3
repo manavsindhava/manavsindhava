@@ -1,0 +1,152 @@
+<!-- Task3:WriteaJavaScript program that creates a class called 'Shape' with a method to calculate the area.
+Create two subclasses, 'Circle' and 'Triangle', that inherit from the 'Shape' class and override the area
+ calculation method. Create an instance of the 'Circle' class and calculate its area. Similarly, do the same for
+ the 'Triangle' class. -->
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shape Area Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #ffffff;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        input, select {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        p {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Shape Area Calculator</h1>
+        <label for="shape">Select Shape:</label>
+        <select id="shape" onchange="updateInputs()">
+            <option value="circle">Circle</option>
+            <option value="triangle">Triangle</option>
+        </select>
+        <div id="inputs">
+            <input type="number" id="radius" placeholder="Enter radius" />
+        </div>
+        <button onclick="calculateArea()">Calculate Area</button>
+        <p id="result">Area: </p>
+    </div>
+
+    <script>
+        class Shape {
+            calculateArea() {
+                return 0;
+            }
+        }
+
+        class Circle extends Shape {
+            constructor(radius) {
+                super();
+                this.radius = radius;
+            }
+
+            calculateArea() {
+                return Math.PI * this.radius * this.radius;
+            }
+        }
+
+        class Triangle extends Shape {
+            constructor(base, height) {
+                super();
+                this.base = base;
+                this.height = height;
+            }
+
+            calculateArea() {
+                return 0.5 * this.base * this.height;
+            }
+        }
+
+        function updateInputs() {
+            const shape = document.getElementById('shape').value;
+            const inputsDiv = document.getElementById('inputs');
+            inputsDiv.innerHTML = '';
+
+            if (shape === 'circle') {
+                inputsDiv.innerHTML = `<input type="number" id="radius" placeholder="Enter radius" />`;
+            } else if (shape === 'triangle') {
+                inputsDiv.innerHTML = `
+                    <input type="number" id="base" placeholder="Enter base" />
+                    <input type="number" id="height" placeholder="Enter height" />
+                `;
+            }
+        }
+
+        function calculateArea() {
+            const shape = document.getElementById('shape').value;
+            let area = 0;
+
+            if (shape === 'circle') {
+                const radius = parseFloat(document.getElementById('radius').value);
+                if (isNaN(radius) || radius <= 0) {
+                    alert('Please enter a valid radius.');
+                    return;
+                }
+                const circle = new Circle(radius);
+                area = circle.calculateArea();
+            } else if (shape === 'triangle') {
+                const base = parseFloat(document.getElementById('base').value);
+                const height = parseFloat(document.getElementById('height').value);
+                if (isNaN(base) || base <= 0 || isNaN(height) || height <= 0) {
+                    alert('Please enter valid base and height values.');
+                    return;
+                }
+                const triangle = new Triangle(base, height);
+                area = triangle.calculateArea();
+            }
+
+            document.getElementById('result').innerText = `Area: ${area.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
